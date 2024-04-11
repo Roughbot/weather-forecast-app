@@ -1,4 +1,5 @@
-const Page = ({ slug }: { slug: string }) => {
+const Page = ({ params }: { params: any }) => {
+  const { slug } = params;
   return (
     <div className="h-screen">
       <p className="text-center text-black font-bold text-3xl pt-10">
@@ -9,16 +10,3 @@ const Page = ({ slug }: { slug: string }) => {
 };
 
 export default Page;
-
-export async function getServerSideProps({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const slug = params.slug;
-  return {
-    props: {
-      slug,
-    },
-  };
-}
