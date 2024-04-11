@@ -1,6 +1,6 @@
 "use client";
-const page = ({ params }: any) => {
-  const { slug } = params;
+const page = (params: any) => {
+  const slug = params;
   return (
     <div className="h-screen">
       <p className="text-center text-black font-bold text-3xl pt-10">
