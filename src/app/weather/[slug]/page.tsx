@@ -1,3 +1,4 @@
+"use client";
 const page = ({ params }: any) => {
   const { slug } = params;
   return (
