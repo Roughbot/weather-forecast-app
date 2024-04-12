@@ -7,6 +7,9 @@ const HeroWeather = () => {
     longitude: number;
   } | null>(null);
   const [cityName, setCityName] = useState("");
+
+  const [weatherData, setWeatherData] = useState(null);
+
   useEffect(() => {
     // Check if geolocation is available
     if ("geolocation" in navigator) {
@@ -16,6 +19,7 @@ const HeroWeather = () => {
           longitude: position.coords.longitude,
         });
         getCityName(position.coords.latitude, position.coords.longitude);
+        getWeatherData(position.coords.latitude, position.coords.longitude);
       });
     } else {
       alert("Geolocation is not supported by your browser.");
@@ -28,13 +32,14 @@ const HeroWeather = () => {
     );
     const data = await response.json();
     setCityName(data.results[0].components._normalized_city);
+    console.log(data);
   };
   const getWeatherData = async (lat: number, lon: number) => {
     const response = await fetch(
-      `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&units=imperial`
     );
     const data = await response.json();
-    console.log(data);
+    setWeatherData(data);
   };
   return (
     <div className="items-center flex flex-col justify-center pt-4">
