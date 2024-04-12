@@ -24,17 +24,22 @@ const HeroWeather = () => {
 
   const getCityName = async (latitude: number, longitude: number) => {
     const response = await fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${latitude}%2C${longitude}&key=877c41d9c7044d3fb1d9b9b961918356`
+      `https://api.opencagedata.com/geocode/v1/json?q=${latitude}%2C${longitude}&key=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
+    );
+    const data = await response.json();
+    setCityName(data.results[0].components._normalized_city);
+  };
+  const getWeatherData = async (lat: number, lon: number) => {
+    const response = await fetch(
+      `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
     );
     const data = await response.json();
     console.log(data);
-    setCityName(data.results[0].components._normalized_city);
   };
-
   return (
     <div className="items-center flex flex-col justify-center pt-4">
       <h2 className="text-4xl text-blue-500 font-bold ">Weather Forecast</h2>
-      <div className="py-4">
+      <div className="mt-4 p-4 glass_morphism">
         <p>Latitude: {location?.latitude}</p>
         <p>Longitude: {location?.longitude}</p>
         <p>City: {cityName}</p>
