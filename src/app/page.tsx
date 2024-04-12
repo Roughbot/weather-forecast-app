@@ -1,9 +1,15 @@
 import WeatherTable from "@/components/tabel";
+import HeroWeather from "../components/HeroWeather";
 
 const page = () => {
   return (
-    <div className="px-4 py-4 min-h-screen">
-      <WeatherTable />
+    <div>
+      <div>
+        <HeroWeather />
+      </div>
+      <div className="px-10 py-10 max-h-screen">
+        <WeatherTable />
+      </div>
     </div>
   );
 };

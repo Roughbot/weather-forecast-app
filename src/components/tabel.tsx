@@ -122,7 +122,6 @@ const Example = () => {
     () => data?.pages.flatMap((page: any) => page.results) ?? [],
     [data]
   );
-  console.log(flatData);
 
   const totalDBRowCount = 50000;
 
