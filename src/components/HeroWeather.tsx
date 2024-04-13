@@ -1,24 +1,75 @@
 "use client";
+import { format, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
 
-const HeroWeather = () => {
-  const [location, setLocation] = useState<{
-    latitude: number;
-    longitude: number;
-  } | null>(null);
-  const [cityName, setCityName] = useState("");
+interface WeatherDataType {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: WeatherEntry[];
+  city: CityInfo;
+}
 
-  const [weatherData, setWeatherData] = useState(null);
+interface WeatherEntry {
+  dt: number;
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    sea_level: number;
+    grnd_level: number;
+    humidity: number;
+    temp_kf: number;
+  };
+  weather: WeatherCondition[];
+  clouds: {
+    all: number;
+  };
+  wind: {
+    speed: number;
+    deg: number;
+    gust: number;
+  };
+  visibility: number;
+  pop: number;
+  sys: {
+    pod: string;
+  };
+  dt_txt: string;
+}
+
+interface WeatherCondition {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+interface CityInfo {
+  id: number;
+  name: string;
+  coord: {
+    lat: number;
+    lon: number;
+  };
+  country: string;
+  population: number;
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+
+const HeroWeather = () => {
+  const [weatherData, setWeatherData] = useState<WeatherDataType>();
+
+  const firstData = weatherData?.list[0];
 
   useEffect(() => {
     // Check if geolocation is available
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        getCityName(position.coords.latitude, position.coords.longitude);
         getWeatherData(position.coords.latitude, position.coords.longitude);
       });
     } else {
@@ -26,14 +77,6 @@ const HeroWeather = () => {
     }
   }, []);
 
-  const getCityName = async (latitude: number, longitude: number) => {
-    const response = await fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${latitude}%2C${longitude}&key=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
-    );
-    const data = await response.json();
-    setCityName(data.results[0].components._normalized_city);
-    console.log(data);
-  };
   const getWeatherData = async (lat: number, lon: number) => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&units=imperial`
@@ -41,13 +84,26 @@ const HeroWeather = () => {
     const data = await response.json();
     setWeatherData(data);
   };
+
+  if (!weatherData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="items-center flex flex-col justify-center pt-4">
       <h2 className="text-4xl text-blue-500 font-bold ">Weather Forecast</h2>
-      <div className="mt-4 p-4 glass_morphism">
-        <p>Latitude: {location?.latitude}</p>
-        <p>Longitude: {location?.longitude}</p>
-        <p>City: {cityName}</p>
+      <div className="m-4 p-4 glass_morphism items-center justify-center ">
+        <section>
+          <div>
+            <h2 className="flex gap-1 text-2xl items-center">
+              <p>
+                {firstData?.dt_txt
+                  ? format(parseISO(firstData?.dt_txt ?? ""), "EEEE")
+                  : "Invalid date"}
+              </p>
+            </h2>
+          </div>
+        </section>
       </div>
     </div>
   );
