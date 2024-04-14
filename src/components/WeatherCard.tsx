@@ -109,7 +109,7 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
 
   if (!weatherData) {
     return (
-      <div className="flex items-center justify-center p-20">
+      <div className="flex items-center justify-center min-h-screen p-20">
         <h3 className="text-4xl text-center font-semibold text-blue-700">
           Loading...
         </h3>
@@ -122,6 +122,11 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
       <div className="glass_morphism p-6">
         <FirstDataContainer weatherData={weatherData} />
       </div>
+      <div className="pt-10 mt-4">
+        <h2 className="text-4xl font-semibold text-yellow-300">
+          Next 6 days weather forecast for {weatherData?.city.name}{" "}
+        </h2>
+      </div>
       <div className="overflow-y-auto space-y-6 mt-10">
         {firstDataForEachDay.map((data, index: number) => {
           return (
@@ -129,7 +134,7 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
               key={index}
               description={data?.weather[0].description ?? ""}
               weatherIcon={data?.weather[0].icon ?? ""}
-              date={format(parseISO(data?.dt_txt ?? ""), "dd.MM")}
+              date={format(parseISO(data?.dt_txt ?? ""), "dd.MM.yyyy")}
               day={format(parseISO(data?.dt_txt ?? ""), "EEEE")}
               temp={Math.round(data?.main.temp ?? 0)}
               feels_like={Math.round(data?.main.feels_like ?? 0)}

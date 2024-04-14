@@ -27,8 +27,8 @@ const FiveDaysWeather = (props: forecastWeatherDetailsProps) => {
   } = props;
 
   return (
-    <div className="w-full bg-white border rounded-lg glass_morphism flex py-4 shadow-md gap-4">
-      <section className="flex gap-4 items-center px-4">
+    <div className="w-full bg-white border rounded-lg glass_morphism flex sm:flex-row flex-col py-4 shadow-md gap-4">
+      <section className="flex gap-4 justify-around items-center px-4">
         <div className="items-center justify-center flex flex-col">
           <div className="relative h-20 w-20">
             <Image
@@ -58,7 +58,7 @@ const FiveDaysWeather = (props: forecastWeatherDetailsProps) => {
           <p>{description}</p>
         </div>
       </section>
-      <section className="overflow-x-auto flex justify-between gap-4 px-4 w-full pr-10">
+      <section className="overflow-x-auto flex no-scrollbar justify-between gap-4 p-4 w-full ">
         <WeatherDetails {...props} />
       </section>
     </div>

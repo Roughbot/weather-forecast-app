@@ -16,9 +16,14 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
+* {
+  box-sizing: border-box;
+}
 body {
   position: relative;
+  margin: 0;
+  padding: 0;
+  height: 100%;
   color: rgb(var(--foreground-rgb));
   font-family: "Comfortaa", sans-serif;
   background: linear-gradient(
@@ -36,11 +41,12 @@ body {
 }
 
 .gradient_background {
+  background-repeat: no-repeat;
   background: linear-gradient(to right, #000046, #1cb5e0);
   background-size: 400% 400%;
   animation: gradient 6s ease infinite;
-  min-height: 100%;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 @keyframes gradient {
   0% {
@@ -86,7 +92,7 @@ body {
 
 .bg_image2 {
   left: 69%;
-  top: 56%;
+  top: 50%;
 }
 
 .glass_morphism {

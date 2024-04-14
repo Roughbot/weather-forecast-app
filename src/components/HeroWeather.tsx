@@ -64,8 +64,6 @@ interface CityInfo {
 const HeroWeather = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();
 
-  console.log(weatherData);
-
   useEffect(() => {
     // Check if geolocation is available
     if ("geolocation" in navigator) {
@@ -97,8 +95,7 @@ const HeroWeather = () => {
 
   return (
     <div className=" flex flex-col  pt-4">
-      <h2 className="text-4xl font-bold text-center">Weather Forecast</h2>
-      <div className="m-4 p-4 glass_morphism ">
+      <div className="p-4 glass_morphism_dark ">
         <FirstDataContainer weatherData={weatherData} />
       </div>
     </div>

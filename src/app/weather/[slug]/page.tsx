@@ -13,7 +13,7 @@ const Page = ({ params }: { params: any }) => {
         <h2 className="text-5xl font-bold text-yellow-400 text-center pt-6">
           {cityName}
         </h2>
-        <div className="m-4 p-4">
+        <div className="p-4">
           <WeatherCard cityName={cityName} />
         </div>
       </div>
