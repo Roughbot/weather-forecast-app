@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,6 +20,7 @@
 body {
   position: relative;
   color: rgb(var(--foreground-rgb));
+  font-family: "Comfortaa", sans-serif;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -51,6 +53,24 @@ body {
     background-position: 0% 50%;
   }
 }
+
+.animated_text {
+  color: #000046;
+  animation: color_change 8s ease infinite;
+}
+
+@keyframes color_change {
+  0% {
+    color: #000046;
+  }
+  50% {
+    color: #f1f51d;
+  }
+  100% {
+    color: #000046;
+  }
+}
+
 .top_screen {
   position: relative;
   z-index: 999;
@@ -76,4 +96,15 @@ body {
   -webkit-backdrop-filter: blur(2px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

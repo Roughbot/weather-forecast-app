@@ -44,7 +44,6 @@ const columns: MRT_ColumnDef<User>[] = [
   {
     accessorKey: "ascii_name",
     header: "City",
-    enableSorting: false,
     Cell: ({ cell }) => (
       <Link href={`/weather/${cell.getValue()}`} target="_blank">
         {cell.getValue() as string}
@@ -54,31 +53,26 @@ const columns: MRT_ColumnDef<User>[] = [
   {
     accessorKey: "cou_name_en",
     header: "Country",
-    enableSorting: false,
   },
   {
     accessorKey: "timezone",
     header: "Time Zone",
-    enableSorting: false,
   },
   {
     accessorKey: "coordinates.lat",
     header: "Latitude",
-    enableSorting: false,
   },
   {
     accessorKey: "coordinates.lon",
     header: "Longitude",
-    enableSorting: false,
   },
   {
     accessorKey: "country_code",
     header: "Country Code",
-    enableSorting: false,
   },
 ];
 
-const fetchSize = 20;
+const fetchSize = 100;
 
 const Example = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
@@ -204,7 +198,6 @@ const Example = () => {
 const queryClient = new QueryClient();
 
 const WeatherTable = () => (
-  //App.tsx or AppProviders file. Don't just wrap this component with QueryClientProvider! Wrap your whole App!
   <QueryClientProvider client={queryClient}>
     <Example />
   </QueryClientProvider>

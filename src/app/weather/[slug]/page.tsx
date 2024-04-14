@@ -11,10 +11,10 @@ const Page = ({ params }: { params: any }) => {
   return (
     <div className="gradient_background">
       <div className="top_screen">
-        <h2 className="text-2xl font-bold text-stone-800 text-center p-8">
+        <h2 className="text-5xl font-bold text-yellow-400 text-center pt-6">
           {cityName}
         </h2>
-        <div className="items-cente justify-center flex">
+        <div className="m-4 p-4">
           <WeatherCard cityName={cityName} />
         </div>
       </div>

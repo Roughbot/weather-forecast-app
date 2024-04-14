@@ -1,6 +1,6 @@
 "use client";
-import { format, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
+import FirstDataContainer from "./container";
 
 interface WeatherDataType {
   cod: string;
@@ -64,7 +64,7 @@ interface CityInfo {
 const HeroWeather = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();
 
-  const firstData = weatherData?.list[0];
+  console.log(weatherData);
 
   useEffect(() => {
     // Check if geolocation is available
@@ -86,24 +86,20 @@ const HeroWeather = () => {
   };
 
   if (!weatherData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center p-20">
+        <h3 className="text-4xl text-center font-semibold text-blue-700">
+          Loading...
+        </h3>
+      </div>
+    );
   }
 
   return (
-    <div className="items-center flex flex-col justify-center pt-4">
-      <h2 className="text-4xl text-blue-500 font-bold ">Weather Forecast</h2>
-      <div className="m-4 p-4 glass_morphism items-center justify-center ">
-        <section>
-          <div>
-            <h2 className="flex gap-1 text-2xl items-center">
-              <p>
-                {firstData?.dt_txt
-                  ? format(parseISO(firstData?.dt_txt ?? ""), "EEEE")
-                  : "Invalid date"}
-              </p>
-            </h2>
-          </div>
-        </section>
+    <div className=" flex flex-col  pt-4">
+      <h2 className="text-4xl font-bold text-center">Weather Forecast</h2>
+      <div className="m-4 p-4 glass_morphism ">
+        <FirstDataContainer weatherData={weatherData} />
       </div>
     </div>
   );
