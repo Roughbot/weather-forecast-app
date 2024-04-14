@@ -1,4 +1,3 @@
-import Head from "next/head";
 import day from "../../../../public/assets/cloudy-day.png";
 import night from "../../../../public/assets/cloudy-night.png";
 import Image from "next/image";
@@ -18,7 +17,6 @@ const Page = ({ params }: { params: any }) => {
           <WeatherCard cityName={cityName} />
         </div>
       </div>
-
       <Image
         src={day}
         alt="day"

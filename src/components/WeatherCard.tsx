@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import FirstDataContainer from "./container";
+import FiveDaysWeather from "@/components/fiveDaysWeather";
+import { format, fromUnixTime, parseISO } from "date-fns";
+import { convertWindSpeend } from "@/app/utils/windSpeedConvert";
 
 interface WeatherDataType {
   cod: string;
@@ -64,6 +67,25 @@ interface CityInfo {
 const WeatherCard = ({ cityName }: { cityName: string }) => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();
 
+  const uniqueDates = [
+    ...new Set(
+      weatherData?.list.map(
+        (weatherEntry) =>
+          new Date(weatherEntry.dt * 1000).toISOString().split("T")[0]
+      )
+    ),
+  ];
+
+  const firstDataForEachDay = uniqueDates.map((date) => {
+    return weatherData?.list.find((weatherEntry) => {
+      const entryDate = new Date(weatherEntry.dt * 1000)
+        .toISOString()
+        .split("T")[0];
+      const entryTime = new Date(weatherEntry.dt * 1000).getHours();
+      return entryDate === date && entryTime >= 6;
+    });
+  });
+
   useEffect(() => {
     weatherDataFunction(cityName);
   }, [cityName]);
@@ -85,7 +107,6 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
     setWeatherData(responseData);
   };
 
-  
   if (!weatherData) {
     return (
       <div className="flex items-center justify-center p-20">
@@ -100,6 +121,37 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
     <div>
       <div className="glass_morphism p-6">
         <FirstDataContainer weatherData={weatherData} />
+      </div>
+      <div className="overflow-y-auto space-y-6 mt-10">
+        {firstDataForEachDay.map((data, index: number) => {
+          return (
+            <FiveDaysWeather
+              key={index}
+              description={data?.weather[0].description ?? ""}
+              weatherIcon={data?.weather[0].icon ?? ""}
+              date={format(parseISO(data?.dt_txt ?? ""), "dd.MM")}
+              day={format(parseISO(data?.dt_txt ?? ""), "EEEE")}
+              temp={Math.round(data?.main.temp ?? 0)}
+              feels_like={Math.round(data?.main.feels_like ?? 0)}
+              temp_max={Math.round(data?.main.temp_max ?? 0)}
+              temp_min={Math.round(data?.main.temp_min ?? 0)}
+              airPressure={`${data?.main.pressure} hPa` ?? ""}
+              humidity={`${data?.main.humidity}%` ?? ""}
+              sunrise={format(
+                fromUnixTime(weatherData?.city.sunrise ?? 1702517657),
+                "HH:mm"
+              )}
+              sunset={format(
+                fromUnixTime(weatherData?.city.sunset ?? 1702517657),
+                "HH:mm"
+              )}
+              visibility={`${data?.visibility} m` ?? ""}
+              windSpeed={
+                `${convertWindSpeend(data?.wind.speed ?? 1.64)} m/s` ?? ""
+              }
+            />
+          );
+        })}
       </div>
     </div>
   );
