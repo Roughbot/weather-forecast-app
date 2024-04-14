@@ -2,6 +2,7 @@ import { format, fromUnixTime, parseISO } from "date-fns";
 import Image from "next/image";
 import { metersToKilometers } from "@/app/utils/metersToKilometers";
 import WeatherDetails from "@/components/weatherDetails";
+import { convertWindSpeend } from "@/app/utils/windSpeedConvert";
 
 export default function FirstDataContainer({ weatherData }: any) {
   const firstData = weatherData?.list[0];
@@ -15,7 +16,7 @@ export default function FirstDataContainer({ weatherData }: any) {
             ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")})
           </p>
         </h2>
-        <div className="w-full bg-white border glass_morphism rounded-xl flex py-4 shadow-sm gap-10 px-6 items-center">
+        <div className="w-full bg-white border glass_morphism rounded-xl flex flex-col sm:flex-row py-4 shadow-sm gap-10 px-6 items-center">
           <div className="flex flex-col px-4">
             <span>
               <span className="text-5xl">
@@ -75,12 +76,12 @@ export default function FirstDataContainer({ weatherData }: any) {
           </p>
         </div>
 
-        <div className="px-6 gap-1 justify-between overflow-x-auto w-full flex flex-row glass_morphism rounded-lg shadow-sm py-4">
+        <div className="px-6 gap-4 justify-between overflow-x-auto w-full flex  no-scrollbar sm:flex-row glass_morphism rounded-lg shadow-sm py-4">
           <WeatherDetails
             visibility={metersToKilometers(firstData?.visibility)}
             airPressure={`${firstData?.main.pressure} hPa`}
             humidity={`${firstData?.main.humidity}%`}
-            windSpeed={`${firstData?.wind.speed} m/s`}
+            windSpeed={`${convertWindSpeend(firstData?.wind.speed)} m/s`}
             sunrise={format(fromUnixTime(weatherData?.city.sunrise), "hh:mm a")}
             sunset={format(fromUnixTime(weatherData?.city.sunset), "hh:mm a")}
           />

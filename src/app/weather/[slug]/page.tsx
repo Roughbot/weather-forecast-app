@@ -18,6 +18,7 @@ const Page = ({ params }: { params: any }) => {
           <WeatherCard cityName={cityName} />
         </div>
       </div>
+
       <Image
         src={day}
         alt="day"
