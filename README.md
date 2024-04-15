@@ -2,7 +2,25 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First install all the required dependencies using the command.
+
+```bash
+npm install
+```
+
+After installation is completed, 
+
+In this project two api are used.
+
+[Used to get city name](https://public.opendatasoft.com/explore/dataset/geonames-all-cities-with-a-population-1000/api/?disjunctive.cou_name_en&sort=name)
+[Used to fetch weather from the given City name](https://openweathermap.org/)
+
+Add envionment variables.
+```
+NEXT_PUBLIC_WEATHER_API_KEY
+```
+
+run the development server:
 
 ```bash
 npm run dev
