@@ -33,6 +33,10 @@ const recentSlice = createSlice({
         name: action.payload.name,
       };
 
+      if (state.recents.length >= 10) {
+        state.recents.pop();
+      }
+
       state.recents.push(recent);
     },
   },
