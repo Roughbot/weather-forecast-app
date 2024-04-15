@@ -47,13 +47,13 @@ const Nav = () => {
             Recently Visited
           </button>
           {isOpenRec && (
-            <DropDown favoriteCities={favoriteCities} name={Recent} />
+            <DropDown favoriteCities={favoriteCities} name={"Recent"} />
           )}
           <button onClick={toggleDropdownFav} className="">
             Favourite
           </button>
           {isOpenFav && (
-            <DropDown favoriteCities={favoriteCities} name={Favourite} />
+            <DropDown favoriteCities={favoriteCities} name={"Favourite"} />
           )}
         </div>
       </div>
