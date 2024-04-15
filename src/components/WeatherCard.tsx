@@ -4,6 +4,7 @@ import FirstDataContainer from "./container";
 import FiveDaysWeather from "@/components/fiveDaysWeather";
 import { format, fromUnixTime, parseISO } from "date-fns";
 import { convertWindSpeend } from "@/app/utils/windSpeedConvert";
+import Loading from "./loading/loading";
 
 interface WeatherDataType {
   cod: string;
@@ -109,10 +110,8 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
 
   if (!weatherData) {
     return (
-      <div className="flex items-center justify-center min-h-screen p-20">
-        <h3 className="text-4xl text-center font-semibold text-blue-700">
-          Loading...
-        </h3>
+      <div className="flex items-center justify-center p-10 w-full h-screen">
+        <Loading />
       </div>
     );
   }
@@ -124,11 +123,11 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
       </div>
       <div className="pt-10 mt-4">
         <h2 className="text-4xl font-semibold text-yellow-300">
-          Next 6 days weather forecast for {weatherData?.city.name}{" "}
+          Next 5 days weather forecast for {weatherData?.city.name}{" "}
         </h2>
       </div>
       <div className="overflow-y-auto space-y-6 mt-10">
-        {firstDataForEachDay.map((data, index: number) => {
+        {firstDataForEachDay.slice(0, 5).map((data, index: number) => {
           return (
             <FiveDaysWeather
               key={index}

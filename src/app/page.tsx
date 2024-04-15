@@ -3,7 +3,7 @@ import HeroWeather from "../components/HeroWeather";
 
 const page = () => {
   return (
-    <div className="gradient_background">
+    <div className="dark_background">
       <div className="p-4">
         <HeroWeather />
       </div>

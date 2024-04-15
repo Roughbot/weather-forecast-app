@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import FirstDataContainer from "./container";
+import Loading from "./loading/loading";
 
 interface WeatherDataType {
   cod: string;
@@ -85,17 +86,15 @@ const HeroWeather = () => {
 
   if (!weatherData) {
     return (
-      <div className="flex items-center justify-center p-20">
-        <h3 className="text-4xl text-center font-semibold text-blue-700">
-          Loading...
-        </h3>
+      <div className="flex items-center justify-center p-20 w-full">
+        <Loading />
       </div>
     );
   }
 
   return (
     <div className=" flex flex-col  pt-4">
-      <div className="p-4 glass_morphism_dark ">
+      <div className="p-4 glass_morphism ">
         <FirstDataContainer weatherData={weatherData} />
       </div>
     </div>

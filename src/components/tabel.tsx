@@ -99,7 +99,13 @@ const Example = () => {
         {
           globalFilter && url.searchParams.set("where", `"${globalFilter}"`);
         }
-        url.searchParams.set("order_by", "name");
+        if (sorting.length > 0) {
+          const sortField = sorting[0].id;
+          const sortOrder = sorting[0].desc ? "desc" : "asc";
+          url.searchParams.set("order_by", `${sortField} ${sortOrder}`);
+        } else {
+          url.searchParams.set("order_by", "name");
+        }
         url.searchParams.set("limit", `${fetchSize}`);
         url.searchParams.set("offset", `${pageParam}`);
 

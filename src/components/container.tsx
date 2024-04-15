@@ -8,8 +8,8 @@ export default function FirstDataContainer({ weatherData }: any) {
   const firstData = weatherData?.list[0];
 
   return (
-    <section>
-      <div className="space-y-2">
+    <section className="text-white">
+      <div className="space-y-2 ">
         <h2 className="flex gap-1 text-2xl items-center">
           <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p>
           <p className="text-lg">

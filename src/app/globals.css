@@ -60,20 +60,25 @@ body {
   }
 }
 
-.animated_text {
-  color: #000046;
-  animation: color_change 8s ease infinite;
+.dark_background {
+  background: linear-gradient(45deg, #2196f3 0%, #0d47a1 100%);
+  background-size: 200% 200%;
+  height: 100%;
+  width: 100%;
+  animation: background 3s ease infinite;
 }
 
-@keyframes color_change {
+@keyframes background {
   0% {
-    color: #000046;
+    background-position: 0% 50%;
   }
+
   50% {
-    color: #f1f51d;
+    background-position: 100% 50%;
   }
+
   100% {
-    color: #000046;
+    background-position: 0% 50%;
   }
 }
 
