@@ -27,14 +27,14 @@ const Nav = () => {
   const recentCities = useSelector((state: any) => state.recent.recents);
 
   return (
-    <nav className="bg-blue-950 sticky z-10">
+    <nav className="bg-blue-950 relative z-50">
       <div className="flex justify-between items-center">
         <div>
           <Link href="/">
             <Image src="/assets/logo.png" alt="Logo" width={60} height={60} />
           </Link>
         </div>
-        <div className="text-white relative flex flex-row gap-3 sm:pr-10">
+        <div className="text-white relative flex flex-row gap-3 pr-4 sm:pr-10">
           <button onClick={toggleDropdownRec} className="">
             Recently Visited
           </button>

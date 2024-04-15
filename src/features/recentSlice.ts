@@ -34,7 +34,7 @@ const recentSlice = createSlice({
       };
 
       if (state.recents.length >= 10) {
-        state.recents.pop();
+        state.recents.shift();
       }
 
       state.recents.push(recent);

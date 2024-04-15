@@ -1,5 +1,10 @@
 import WeatherTable from "@/components/tabel";
 import HeroWeather from "../components/HeroWeather";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Weather App",
+};
 
 const page = () => {
   return (
