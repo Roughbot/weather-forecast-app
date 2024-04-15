@@ -2,6 +2,7 @@ import day from "../../../../public/assets/cloudy-day.png";
 import night from "../../../../public/assets/cloudy-night.png";
 import Image from "next/image";
 import WeatherCard from "@/components/WeatherCard";
+import FavButton from "@/components/FavButton";
 
 const Page = ({ params }: { params: any }) => {
   const { slug } = params;
@@ -10,9 +11,15 @@ const Page = ({ params }: { params: any }) => {
   return (
     <div className="gradient_background">
       <div className="top_screen">
-        <h2 className="text-5xl font-bold text-yellow-400 text-center pt-6">
-          {cityName}
-        </h2>
+        <div className="flex flex-row items-center justify-center">
+          <h2 className="text-5xl font-bold text-black sm:text-yellow-400 pt-6">
+            {cityName}
+          </h2>
+          <div>
+            <FavButton cityName={cityName} />
+          </div>
+        </div>
+
         <div className="p-4">
           <WeatherCard cityName={cityName} />
         </div>

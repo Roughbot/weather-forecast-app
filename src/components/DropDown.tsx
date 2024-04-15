@@ -1,9 +1,13 @@
-const DropDown = (favoriteCities: any, name: string) => {
-  const data = favoriteCities.favoriteCities;
+import Link from "next/link";
 
+const DropDown = (favoriteCities: any) => {
+  const data = favoriteCities.favoriteCities;
+  const dropDownName = favoriteCities.name;
   return (
     <div className="origin-top-right absolute right-30 mt-10 w-48 rounded-md h-48 overflow-y-scroll no-scrollbar shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-      <div className="px-4 py-2 font-bold text-gray-700">{name}</div>
+      <div className="px-4 py-2 font-bold bg-slate-500 sticky text-white">
+        {dropDownName}
+      </div>
       <div
         className="py-1"
         role="menu"
@@ -18,7 +22,9 @@ const DropDown = (favoriteCities: any, name: string) => {
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
               >
-                {city.name}
+                <Link href={`/weather/${city.name}`} target="_blank">
+                  {city.name}
+                </Link>
               </li>
             ))}
           </ul>
