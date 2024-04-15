@@ -6,6 +6,8 @@ import { format, fromUnixTime, parseISO } from "date-fns";
 import { convertWindSpeend } from "@/app/utils/windSpeedConvert";
 import Loading from "./loading/loading";
 import { metersToKilometers } from "@/app/utils/metersToKilometers";
+import { addRecent } from "@/features/recentSlice";
+import { useDispatch } from "react-redux";
 
 interface WeatherDataType {
   cod: string;
@@ -69,6 +71,7 @@ interface CityInfo {
 const WeatherCard = ({ cityName }: { cityName: string }) => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();
 
+  const dispatch = useDispatch();
   const uniqueDates = [
     ...new Set(
       weatherData?.list.map(
@@ -90,7 +93,8 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
 
   useEffect(() => {
     weatherDataFunction(cityName);
-  }, [cityName]);
+    dispatch(addRecent({ name: cityName }));
+  }, [cityName, dispatch]);
 
   const weatherDataFunction = async (slug: string) => {
     const response = await fetch(

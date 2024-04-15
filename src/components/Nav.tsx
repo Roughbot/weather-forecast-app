@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DropDown from "./DropDown";
+import { useSelector } from "react-redux";
 
 const Nav = () => {
   const [isOpenFav, setIsOpenFav] = useState(false);
@@ -21,18 +22,9 @@ const Nav = () => {
       setIsOpenFav(false);
     }
   };
-  const favoriteCities: any = [
-    { id: 1, name: "London" },
-    { id: 2, name: "New York" },
-    { id: 3, name: "Paris" },
-    { id: 4, name: "Tokyo" },
-    { id: 5, name: "Sydney" },
-    { id: 6, name: "Dubai" },
-    { id: 7, name: "Singapore" },
-    { id: 8, name: "Istanbul" },
-    { id: 9, name: "Kuala Lumpur" },
-    { id: 10, name: "Seoul" },
-  ];
+
+  const favoriteCities = useSelector((state: any) => state.fav.favs);
+  const recentCities = useSelector((state: any) => state.recent.recents);
 
   return (
     <nav className="bg-blue-950 sticky z-10">
@@ -47,7 +39,7 @@ const Nav = () => {
             Recently Visited
           </button>
           {isOpenRec && (
-            <DropDown favoriteCities={favoriteCities} name={"Recent"} />
+            <DropDown favoriteCities={recentCities} name={"Recent"} />
           )}
           <button onClick={toggleDropdownFav} className="">
             Favourite

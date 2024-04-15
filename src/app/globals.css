@@ -83,7 +83,6 @@ body {
 }
 
 .top_screen {
-  position: relative;
   z-index: 999;
 }
 
@@ -92,7 +91,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: 10;
 }
 
 .bg_image2 {

@@ -9,7 +9,7 @@ const Page = ({ params }: { params: any }) => {
   const cityName = decodeURIComponent(slug);
 
   return (
-    <div className="gradient_background">
+    <div className="gradient_background relative">
       <div className="top_screen">
         <div className="flex flex-row items-center justify-center">
           <h2 className="text-5xl font-bold text-black sm:text-yellow-400 pt-6">

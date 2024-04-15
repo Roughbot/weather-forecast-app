@@ -1,12 +1,9 @@
-import type { Metadata } from "next";
+"use client";
 import "./globals.css";
 import Nav from "@/components/Nav";
-
-export const metadata: Metadata = {
-  title: "Weather Forecast",
-  description:
-    "Weather Forecast application to fetch weather data from all the cities around the world.",
-};
+import { store } from "@/store/store";
+import Head from "next/head";
+import { Provider } from "react-redux";
 
 export default function RootLayout({
   children,
@@ -14,11 +11,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Nav />
-        {children}
-      </body>
-    </html>
+    <>
+      <Head>
+        <title>Weather Forecast</title>
+        <meta
+          name="description"
+          content="Weather Forecast application to fetch weather data from all the cities around the world."
+        />
+      </Head>
+      <html lang="en">
+        <body>
+          <Provider store={store}>
+            <Nav />
+            {children}
+          </Provider>
+        </body>
+      </html>
+    </>
   );
 }
