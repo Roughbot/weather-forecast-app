@@ -5,6 +5,7 @@ import FiveDaysWeather from "@/components/fiveDaysWeather";
 import { format, fromUnixTime, parseISO } from "date-fns";
 import { convertWindSpeend } from "@/app/utils/windSpeedConvert";
 import Loading from "./loading/loading";
+import { metersToKilometers } from "@/app/utils/metersToKilometers";
 
 interface WeatherDataType {
   cod: string;
@@ -149,7 +150,7 @@ const WeatherCard = ({ cityName }: { cityName: string }) => {
                 fromUnixTime(weatherData?.city.sunset ?? 1702517657),
                 "HH:mm"
               )}
-              visibility={`${data?.visibility} m` ?? ""}
+              visibility={metersToKilometers(data?.visibility || 0) ?? ""}
               windSpeed={
                 `${convertWindSpeend(data?.wind.speed ?? 1.64)} m/s` ?? ""
               }

@@ -6,7 +6,9 @@ const Nav = () => {
     <nav className="bg-blue-950 sticky z-10">
       <div className="flex justify-between items-center">
         <div>
-          <Image src="/assets/logo.png" alt="Logo" width={60} height={60} />
+          <Link href="/">
+            <Image src="/assets/logo.png" alt="Logo" width={60} height={60} />
+          </Link>
         </div>
         <div className="text-white sm:pr-10">
           <Link href="/favourite" style={{ margin: "0 10px" }}>

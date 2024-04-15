@@ -55,7 +55,7 @@ function SingleWeatherDetails(props: SingleWeatherDetailsProps) {
   return (
     <div className="flex text-white flex-col justify-between gap-1 items-center text-xs font-semibold text-black/80">
       <p className="whitespace-nowrap text-sm">{props.information}</p>
-      <div className="text-4xl">{props.icon}</div>
+      <div className="text-4xl text-black">{props.icon}</div>
       <p>{props.value}</p>
     </div>
   );

@@ -55,7 +55,7 @@ const FiveDaysWeather = (props: forecastWeatherDetailsProps) => {
             <span>{temp_min}°↓ </span>
             <span>{temp_max}°↑ </span>
           </p>
-          <p>{description}</p>
+          <p className="font-semibold">{description}</p>
         </div>
       </section>
       <section className="overflow-x-auto flex no-scrollbar justify-between gap-4 p-4 w-full ">
