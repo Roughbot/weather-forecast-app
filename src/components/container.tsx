@@ -3,9 +3,27 @@ import Image from "next/image";
 import { metersToKilometers } from "@/app/utils/metersToKilometers";
 import WeatherDetails from "@/components/weatherDetails";
 import { convertWindSpeend } from "@/app/utils/windSpeedConvert";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTemperatureUnit } from "@/features/convertSlice";
+import { convertCelciusToFarenheit } from "@/app/utils/tempConverter";
 
 export default function FirstDataContainer({ weatherData }: any) {
   const firstData = weatherData?.list[0];
+
+  const dispatch = useDispatch();
+  const isCelsius = useSelector((state: any) => state.temperature.isCelsius);
+
+  const handleToggleTemperatureUnit = () => {
+    dispatch(toggleTemperatureUnit());
+  };
+
+  const displayTemperature = (temp: number) => {
+    if (isCelsius) {
+      return `${Math.floor(temp)}°C`;
+    } else {
+      return `${Math.floor(convertCelciusToFarenheit(temp))}°F`;
+    }
+  };
 
   return (
     <section className="text-white">
@@ -18,19 +36,21 @@ export default function FirstDataContainer({ weatherData }: any) {
         </h2>
         <div className="w-full bg-white border glass_morphism rounded-xl flex flex-col sm:flex-row py-4 shadow-sm gap-10 px-6 items-center">
           <div className="flex flex-col px-4">
-            <span>
+            <span
+              onClick={handleToggleTemperatureUnit}
+              className="cursor-pointer"
+            >
               <span className="text-5xl">
-                {Math.floor(firstData?.main.temp)}°
+                {displayTemperature(firstData?.main.temp)}
               </span>
-              <span className="text-2xl">C</span>
             </span>
             <p className="text-xs space-x-1 pt-1 whitespace-nowrap">
               <span>Feels Like</span>
-              <span>{Math.floor(firstData?.main.feels_like)}°C</span>
+              <span>{displayTemperature(firstData?.main.feels_like)}</span>
             </p>
             <p className="text-xs space-x-2">
-              <span>{Math.floor(firstData?.main.temp_min)}°↓ </span>
-              <span>{Math.floor(firstData?.main.temp_max)}°↑ </span>
+              <span>{displayTemperature(firstData?.main.temp_min)}↓ </span>
+              <span>{displayTemperature(firstData?.main.temp_max)}↑ </span>
             </p>
           </div>
           <div className="flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3 no-scrollbar">
@@ -55,7 +75,7 @@ export default function FirstDataContainer({ weatherData }: any) {
                   <p className="whitespace-nowrap">
                     {data.weather[0].description}
                   </p>
-                  <p>{Math.floor(data.main.temp)}°C</p>
+                  <p>{displayTemperature(data.main.temp)}</p>
                 </div>
               );
             })}
